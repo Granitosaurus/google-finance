@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "googlefinance"
+version = "0.1.0"
+description = ""
+authors = ["granitosaurus <bernardas.alisauskas@pm.me>"]
+license = "GPLv3"
+packages = [
+    { include = "gfinance.py"},
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+asyncclick = "^8.0.1"
+aiohttp = "^3.8.0"
+anyio = "^3.3.4"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+google-finance = 'gfinance:run'

@@ -10,7 +10,7 @@ async def scrape(exchange, symbol, session):
         f"https://www.google.com/finance/quote/{symbol.upper()}:{exchange.upper()}"
     )
     try:
-        return re.search('data-last-price="([\d\.]+)"', await resp.text()).groups()[0]
+        return exchange, symbol, re.search('data-last-price="([\d\.]+)"', await resp.text()).groups()[0]
     except AttributeError:
         raise NotFoundErr(f"value for pair {exchange}:{symbol} not found")
 
@@ -22,7 +22,7 @@ async def run(exchange: str, symbol: str) -> str:
     """Scrape current exchange:symbol pair price"""
     async with ClientSession() as session:
         try:
-            print(await scrape(exchange, symbol, session))
+            print((await scrape(exchange, symbol, session))[-1])
             exit(0)
         except NotFoundErr:
             print("nothing found")
